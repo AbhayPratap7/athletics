@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athletic Association - Excellence in Sports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.0rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: #667eea;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .hero {
+            margin-top: 80px;
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            box-shadow: 0 4px 15px rgba(238, 90, 36, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(238, 90, 36, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .main-content {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .section {
+            padding: 3rem 0;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .payment-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .payment-method {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .payment-method:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .payment-method.selected {
+            border-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.2);
+        }
+
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .certificate-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .certificate-card:hover::before {
+            opacity: 1;
+            animation: shine 0.5s ease-in-out;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .certificate-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-btn {
+            margin-top: 1rem;
+        }
+
+        .stats-section {
+            background: #f8f9fa;
+            padding: 3rem 0;
+            margin: 2rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                padding: 2rem 0;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transform: translateY(-20px);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-links li {
+                text-align: center;
+                padding: 0.5rem 0;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem;
+                font-size: 1.1rem;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-hero {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .about-hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .why-choose-us {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+
+        .achievements-section {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .achievement-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .achievement-item .number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .facility-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .facility-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .facility-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .facility-content {
+            padding: 1.5rem;
+        }
+
+        .facility-content h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .facility-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .testimonials-section {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .events-timeline {
+            margin: 3rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 2rem;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .timeline-date {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .leadership-section {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+            justify-items: center;
+        }
+
+        .leader-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            max-width: 350px;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .leader-image {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .leader-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .leader-card h4 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .leader-card > p {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .leader-description {
+            color: #666 !important;
+            font-weight: normal !important;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .developer-credit {
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid #e1e5e9;
+        }
+
+        .developer-credit p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        @media (max-width: 480px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    height: 250px;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 1rem;
+    transition: background 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo"> DISTRICT HANDBALL ASSOCIATION AJMER </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showSection('home'); toggleMobileMenu();">Home</a></li>
+                <li><a href="#" onclick="showSection('about'); toggleMobileMenu();">About Us</a></li>
+                <li><a href="#" onclick="showSection('facilities'); toggleMobileMenu();">Facilities</a></li>
+                <li><a href="#" onclick="showSection('gallery'); toggleMobileMenu();">Gallery</a></li>
+                <li><a href="#" onclick="showSection('registration'); toggleMobileMenu();">Registration</a></li>
+                <li><a href="#" onclick="showSection('certificates'); toggleMobileMenu();">Certificates</a></li>
+                <li><a href="#" onclick="showSection('noc'); toggleMobileMenu();">NOC</a></li>
+                <li><a href="#" onclick="showSection('contact'); toggleMobileMenu();">Contact</a></li>
+            </ul>
+            <button class="mobile-menu" id="mobileMenuBtn" onclick="toggleMobileMenu()">☰</button>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Excellence in Athletics</h1>
+            <p>Join our premier athletic association and unlock your sporting potential</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" onclick="showSection('registration')">Register Now</a>
+                <a href="#" class="btn btn-secondary" onclick="showSection('about')">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+            <!-- Home Section -->
+            <section id="home" class="section active">
+                <div class="container">
+                    <h2 class="section-title">Welcome to Our Athletic Association</h2>
+                    
+                    <!-- Stats Section -->
+                    <div class="stats-section">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">500+</div>
+                                <p>Registered Athletes</p>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">50+</div>
+                                <p>Events Organized</p>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">25+</div>
+                                <p>Years of Excellence</p>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">100+</div>
+                                <p>Championships Won</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Section -->
+                    <div class="features-section">
+                        <h3 class="section-title" style="font-size: 2rem;">Why Choose Us?</h3>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <span class="feature-icon">🏆</span>
+                                <h3>Professional Training</h3>
+                                <p>World-class coaching staff with international experience to help you reach your full potential in your chosen sport.</p>
+                            </div>
+                            <div class="feature-card">
+                                <span class="feature-icon">🏟️</span>
+                                <h3>State-of-Art Facilities</h3>
+                                <p>Modern training facilities with the latest equipment and technology for optimal performance development.</p>
+                            </div>
+                            <div class="feature-card">
+                                <span class="feature-icon">🥇</span>
+                                <h3>Proven Track Record</h3>
+                                <p>Over 25 years of producing national and international champions across various athletic disciplines.</p>
+                            </div>
+                            <div class="feature-card">
+                                <span class="feature-icon">👥</span>
+                                <h3>Community Support</h3>
+                                <p>Join a supportive community of athletes, coaches, and sports enthusiasts dedicated to excellence.</p>
+                            </div>
+                            <div class="feature-card">
+                                <span class="feature-icon">📈</span>
+                                <h3>Performance Analytics</h3>
+                                <p>Advanced performance tracking and analysis to monitor progress and optimize training programs.</p>
+                            </div>
+                            <div class="feature-card">
+                                <span class="feature-icon">🎯</span>
+                                <h3>Personalized Programs</h3>
+                                <p>Customized training programs tailored to individual goals, abilities, and competitive aspirations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements Section -->
+                    <div class="achievements-section">
+                        <h3 style="text-align: center; font-size: 2.2rem; margin-bottom: 1rem;">Our Achievements</h3>
+                        <p style="text-align: center; opacity: 0.9; margin-bottom: 2rem;">Celebrating excellence in athletic performance</p>
+                        <div class="achievements-grid">
+                            <div class="achievement-item">
+                                <div class="number">150+</div>
+                                <p>National Championships</p>
+                            </div>
+                            <div class="achievement-item">
+                                <div class="number">25+</div>
+                                <p>International Medals</p>
+                            </div>
+                            <div class="achievement-item">
+                                <div class="number">500+</div>
+                                <p>Athletes Trained</p>
+                            </div>
+                            <div class="achievement-item">
+                                <div class="number">98%</div>
+                                <p>Success Rate</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Events Timeline -->
+                    <div class="events-timeline">
+                        <h3 class="section-title" style="font-size: 2rem;">Upcoming Events</h3>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Dec 2024</div>
+                            <div class="timeline-content">
+                                <h4>Annual Athletic Championship</h4>
+                                <p>Our flagship event featuring competitions in track and field, swimming, and team sports. Open to all registered members.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Jan 2025</div>
+                            <div class="timeline-content">
+                                <h4>Youth Development Program</h4>
+                                <p>Special training program for young athletes aged 12-18, focusing on skill development and competitive preparation.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Feb 2025</div>
+                            <div class="timeline-content">
+                                <h4>International Sports Festival</h4>
+                                <p>Multi-sport festival with participants from various countries, showcasing diverse athletic disciplines.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonials -->
+                    <div class="testimonials-section">
+                        <h3 class="section-title" style="font-size: 2rem; color: #333;">What Our Athletes Say</h3>
+                        <div class="testimonials-grid">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">The training programs here transformed my athletic career. The coaches are incredibly knowledgeable and supportive.</p>
+                                <p class="testimonial-author">- Rahul Sharma, National Champion</p>
+                            </div>
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">Amazing facilities and a great community of athletes. This place feels like a second home to me.</p>
+                                <p class="testimonial-author">- Priya Patel, International Athlete</p>
+                            </div>
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">The personalized training approach helped me achieve my personal best and compete at the national level.</p>
+                                <p class="testimonial-author">- Amit Kumar, Regional Champion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="leadership-section">
+                        <h3 class="section-title" style="font-size: 2rem; color: #333;">Our Leadership</h3>
+                        <p style="text-align: center; color: #666; max-width: 600px; margin: 0 auto 3rem; font-size: 1.1rem;">
+                            Meet the dedicated leaders who guide our association towards excellence and success.
+                        </p>
+                        <div class="leadership-grid">
+                            <div class="leader-card">
+                                <div class="leader-image">
+                                    <img src="himanshu.jpg" alt="President" />
+                                </div>
+                                <h4> Chandrakant Saini </h4>
+                                <p>President</p>
+                                <p class="leader-description">With over 20 years of experience in sports administration and former national-level athlete, Dr. Kumar leads our association with vision and dedication.</p>
+                            </div>
+                            <div class="leader-card">
+                                <div class="leader-image">
+                                    <img src="secretary.jpg" alt="Secretary" />
+                                </div>
+                                <h4>Himanshu Hatwal</h4>
+                                <p>Secretary</p>
+                                <p class="leader-description">A former international athlete and sports management professional, Ms. Sharma ensures smooth operations and athlete welfare across all programs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p style="text-align: center; color: #888; font-size: 0.9rem; margin-top: 2rem;">
+    &copy; 2025 All Rights Reserved. Developed by <strong>Abhay Pratap Singh</strong>.
+</p>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="section">
+                <div class="container">
+                    <div class="about-hero">
+                        <h2>About Our Athletic Association</h2>
+                        <p>Established in 1998, we are a premier athletic association dedicated to nurturing talent, promoting sports excellence, and building champions. Our mission is to provide world-class training facilities and professional guidance to athletes of all levels.</p>
+                    </div>
+
+                    <div class="why-choose-us">
+                        <h3 class="section-title" style="color: #333;">Our Legacy</h3>
+                        <p style="text-align: center; color: #666; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem;">
+                            For over two decades, we have been at the forefront of athletic development, combining traditional training methods with cutting-edge sports science to create champions who represent our nation with pride.
+                        </p>
+                        
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <span class="feature-icon">🎖️</span>
+                                <h3>Excellence in Training</h3>
+                                <p>Our certified coaches bring years of experience and use scientifically proven training methodologies to maximize athletic potential.</p>
+                            </div>
+                            <div class="feature-card">
+                                <span class="feature-icon">🏥</span>
+                                <h3>Sports Medicine Support</h3>
+                                <p>On-site sports medicine team including physiotherapists, nutritionists, and sports psychologists for comprehensive athlete care.</p>
+                            </div>
+                            <div class="feature-card">
+                                <span class="feature-icon">🌟</span>
+                                <h3>Holistic Development</h3>
+                                <p>We focus not just on athletic performance but also on character building, leadership skills, and academic excellence.</p>
+                            </div>
+                            <div class="feature-card">
+                                <span class="feature-icon">🔬</span>
+                                <h3>Sports Science Integration</h3>
+                                <p>Utilize latest technology and research in biomechanics, nutrition, and psychology to enhance performance.</p>
+                            </div>
+                            <div class="feature-card">
+                                <span class="feature-icon">🌍</span>
+                                <h3>International Exposure</h3>
+                                <p>Regular participation in international competitions and exchange programs with global athletic institutions.</p>
+                            </div>
+                            <div class="feature-card">
+                                <span class="feature-icon">💪</span>
+                                <h3>All-Level Training</h3>
+                                <p>Programs designed for beginners to elite athletes, ensuring everyone can find their path to success.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Facilities Section -->
+            <section id="facilities" class="section">
+                <div class="container">
+                    <h2 class="section-title">World-Class Facilities</h2>
+                    <p style="text-align: center; color: #666; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem;">
+                        Our state-of-the-art facilities provide the perfect environment for athletic excellence, combining modern equipment with professional guidance.
+                    </p>
+                    
+                    <div class="facilities-grid">
+                        <div class="facility-card">
+                            <div class="facility-image">🏃‍♂️</div>
+                            <div class="facility-content">
+                                <h3>Athletics Track</h3>
+                                <p>400m synthetic track with 8 lanes, meeting international IAAF standards. Perfect for sprints, middle distance, and long-distance training.</p>
+                            </div>
+                        </div>
+                        <div class="facility-card">
+                            <div class="facility-image">🏊‍♂️</div>
+                            <div class="facility-content">
+                                <h3>Swimming Pool</h3>
+                                <p>Olympic-size swimming pool with temperature control and advanced filtration system. Separate pools for training and diving.</p>
+                            </div>
+                        </div>
+                        <div class="facility-card">
+                            <div class="facility-image">🏋️‍♂️</div>
+                            <div class="facility-content">
+                                <h3>Strength & Conditioning</h3>
+                                <p>Modern gymnasium with latest strength training equipment, cardio machines, and functional training areas.</p>
+                            </div>
+                        </div>
+                        <div class="facility-card">
+                            <div class="facility-image">🏐</div>
+                            <div class="facility-content">
+                                <h3>Indoor Sports Complex</h3>
+                                <p>Multi-sport indoor facility for basketball, volleyball, badminton, and table tennis with professional lighting and flooring.</p>
+                            </div>
+                        </div>
+                        <div class="facility-card">
+                            <div class="facility-image">⚽</div>
+                            <div class="facility-content">
+                                <h3>Football Field</h3>
+                                <p>FIFA-standard football field with natural grass surface and professional drainage system. Floodlights for evening training.</p>
+                            </div>
+                        </div>
+                        <div class="facility-card">
+                            <div class="facility-image">🏏</div>
+                            <div class="facility-content">
+                                <h3>Cricket Ground</h3>
+                                <p>Full-size cricket ground with turf wickets, practice nets, and modern pavilion facilities for matches and training.</p>
+                            </div>
+                        </div>
+                        <div class="facility-card">
+                            <div class="facility-image">🏥</div>
+                            <div class="facility-content">
+                                <h3>Medical Center</h3>
+                                <p>On-site medical facility with qualified sports medicine doctors, physiotherapists, and rehabilitation equipment.</p>
+                            </div>
+                        </div>
+                        <div class="facility-card">
+                            <div class="facility-image">📊</div>
+                            <div class="facility-content">
+                                <h3>Performance Lab</h3>
+                                <p>Advanced sports science laboratory with equipment for biomechanical analysis, fitness testing, and performance monitoring.</p>
+                            </div>
+                        </div>
+                        <div class="facility-card">
+                            <div class="facility-image">🍽️</div>
+                            <div class="facility-content">
+                                <h3>Nutrition Center</h3>
+                                <p>Healthy cafeteria with sports nutrition experts, meal planning services, and supplements store for optimal athlete nutrition.</p>
+                            </div>
+                        </div>
+                        <div class="facility-card">
+                            <div class="facility-image">🏨</div>
+                            <div class="facility-content">
+                                <h3>Accommodation</h3>
+                                <p>Comfortable hostel facilities for outstation athletes with modern amenities, study rooms, and 24/7 security.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+
+            
+<section id="gallery" class="section">
+    <div class="container">
+        <h2 class="section-title">Event Gallery</h2>
+        <p style="text-align: center; color: #666; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem;">
+            Capturing moments of triumph, dedication, and athletic excellence from our various events and competitions.
+        </p>
+
+        <div class="gallery-grid">
+            <div class="gallery-item" >
+                <img src="4bf83545-ab80-49ec-859a-72e6931524d2.JPG" alt="Annual Championship 2024">
+                <div class="gallery-overlay">
+                    
+                </div>
+            </div>
+
+            <div class="gallery-item" >
+                <img src="5447cce2-8dde-4879-b478-6923b74401ed.JPG" alt="Swimming Competition">
+                <div class="gallery-overlay">
+                    
+                </div>
+            </div>
+
+            <div class="gallery-item" >
+                <img src="ce671478-52ec-4bd7-901b-bca34c229f29.JPG" alt="Youth Training Program">
+                <div class="gallery-overlay">
+                    
+                </div>
+            </div>
+
+            <div class="gallery-item" >
+                <img src="fbee0df4-8023-4c01-93a3-d8bc7b58d1bd.JPG" alt="International Sports Festival">
+                <div class="gallery-overlay">
+                    
+                </div>
+            </div>
+
+            <div class="gallery-item" >
+                <img src="fbee0df4-8023-4c01-93a3-d8bc7b58d1bd.JPG" alt="Team Sports Tournament">
+                <div class="gallery-overlay">
+                    
+                </div>
+            </div>
+
+            <div class="gallery-item" >
+                <img src="4bf83545-ab80-49ec-859a-72e6931524d2.JPG" alt="Award Ceremony">
+                <div class="gallery-overlay">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+            <!-- Registration Section -->
+            <section id="registration" class="section">
+                <div class="container">
+                    <h2 class="section-title">Event Registration</h2>
+                    <div class="form-container">
+                        <div class="success-message" id="registrationSuccess">
+                            Registration successful! Payment link will be sent to your email.
+                        </div>
+                        <form id="registrationForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Name *</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fname">Father's Name *</label>
+                                    <input type="text" id="fname" name="fname" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="mname">Mother's Name *</label>
+                                <input type="text" id="mname" name="mname" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="dob">Date of Birth *</label>
+                                    <input type="date" id="dob" name="dob" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="aadhar">Aadhar Number *</label>
+                                    <input type="text" id="aadhar" name="aadhar" maxlength="12" required>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-section">
+                                <h3>Payment Method</h3>
+                                <div class="payment-methods">
+                                    <div class="payment-method" onclick="selectPayment('upi')">
+                                        <h4>UPI Payment</h4>
+                                        <p>Pay via UPI apps</p>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 2rem;">
+                                Register & Pay (₹500)
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certificates Section -->
+            <section id="certificates" class="section">
+                <div class="container">
+                    <h2 class="section-title">Download Certificates</h2>
+                    <div class="certificates-grid">
+                        <div class="certificate-card">
+                            <h3>🏆 Winner Certificate</h3>
+                            <p>First place achievement certificate</p>
+                            <button class="btn btn-secondary download-btn" onclick="downloadCertificate('winner')">
+                                Download Certificate
+                            </button>
+                        </div>
+                        <div class="certificate-card">
+                            <h3>🥈 Runner Up Certificate</h3>
+                            <p>Second place achievement certificate</p>
+                            <button class="btn btn-secondary download-btn" onclick="downloadCertificate('runner')">
+                                Download Certificate
+                            </button>
+                        </div>
+                        <div class="certificate-card">
+                            <h3>🥉 2nd Runner Up</h3>
+                            <p>Third place achievement certificate</p>
+                            <button class="btn btn-secondary download-btn" onclick="downloadCertificate('second-runner')">
+                                Download Certificate
+                            </button>
+                        </div>
+                        <div class="certificate-card">
+                            <h3>🎖️ Participation Certificate</h3>
+                            <p>Certificate of participation</p>
+                            <button class="btn btn-secondary download-btn" onclick="downloadCertificate('participation')">
+                                Download Certificate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NOC Section -->
+            <section id="noc" class="section">
+                <div class="container">
+                    <h2 class="section-title">NOC Application</h2>
+                    <div class="form-container">
+                        <div class="success-message" id="nocSuccess">
+                            NOC application submitted successfully! Processing fee payment link sent to your email.
+                        </div>
+                        <form id="nocForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="noc-name">Name *</label>
+                                    <input type="text" id="noc-name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="noc-fname">Father's Name *</label>
+                                    <input type="text" id="noc-fname" name="fname" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="noc-mname">Mother's Name *</label>
+                                <input type="text" id="noc-mname" name="mname" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="noc-dob">Date of Birth *</label>
+                                    <input type="date" id="noc-dob" name="dob" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="noc-email">Email *</label>
+                                    <input type="email" id="noc-email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="noc-aadhar">Aadhar Number *</label>
+                                    <input type="text" id="noc-aadhar" name="aadhar" maxlength="12" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="registration-id">Registration ID *</label>
+                                    <input type="text" id="registration-id" name="regId" required>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-section">
+                                <h3>Processing Fee Payment</h3>
+                                <div class="payment-methods">
+                                    <div class="payment-method" onclick="selectNocPayment('upi')">
+                                        <h4>UPI Payment</h4>
+                                        <p>Pay via UPI apps</p>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 2rem;">
+                                Submit NOC Application (₹200)
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="section">
+                <div class="container">
+                    <h2 class="section-title">Contact Us</h2>
+                    <div class="form-container">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h3>📧 Email</h3>
+                                <p>handballajmer@gmail.com</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>📱 Phone</h3>
+                                <p>+91 7877433888</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>📍 Address</h3>
+                                <p> ANSAL
+TOWN, NANDANAM APARTMENT, NEAR JANANA HOSPITAL AJMER</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>🕒 Office Hours</h3>
+                                <p>Mon-Fri: 9 AM - 6 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImg" src="" alt="Gallery Image">
+        </div>
+    </div>
+
+    <script>
+        let selectedPaymentMethod = '';
+        let selectedNocPaymentMethod = '';
+
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const navLinks = document.getElementById('navLinks');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function selectPayment(method) {
+            // Remove previous selection
+            document.querySelectorAll('#registration .payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selection to clicked method
+            event.target.closest('.payment-method').classList.add('selected');
+            selectedPaymentMethod = method;
+        }
+
+        function selectNocPayment(method) {
+            // Remove previous selection
+            document.querySelectorAll('#noc .payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selection to clicked method
+            event.target.closest('.payment-method').classList.add('selected');
+            selectedNocPaymentMethod = method;
+        }
+
+        function downloadCertificate(type) {
+            alert(`Downloading ${type} certificate... This would integrate with your certificate generation system.`);
+        }
+
+        function openModal(modalId) {
+            document.getElementById('galleryModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('galleryModal').style.display = 'none';
+        }
+
+        // Form submissions
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!selectedPaymentMethod) {
+                alert('Please select a payment method');
+                return;
+            }
+            
+            // Show success message
+            document.getElementById('registrationSuccess').style.display = 'block';
+            
+            // Here you would integrate with your payment gateway
+            alert(`Processing registration with ${selectedPaymentMethod} payment...`);
+            
+            // Reset form after submission
+            setTimeout(() => {
+                this.reset();
+                document.getElementById('registrationSuccess').style.display = 'none';
+                document.querySelectorAll('#registration .payment-method').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                selectedPaymentMethod = '';
+            }, 3000);
+        });
+
+        document.getElementById('nocForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!selectedNocPaymentMethod) {
+                alert('Please select a payment method');
+                return;
+            }
+            
+            // Show success message
+            document.getElementById('nocSuccess').style.display = 'block';
+            
+            // Here you would integrate with your payment gateway
+            alert(`Processing NOC application with ${selectedNocPaymentMethod} payment...`);
+            
+            // Reset form after submission
+            setTimeout(() => {
+                this.reset();
+                document.getElementById('nocSuccess').style.display = 'none';
+                document.querySelectorAll('#noc .payment-method').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                selectedNocPaymentMethod = '';
+            }, 3000);
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Format Aadhar number input
+        document.getElementById('aadhar').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 12) {
+                value = value.slice(0, 12);
+            }
+            e.target.value = value;
+        });
+
+        document.getElementById('noc-aadhar').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 12) {
+                value = value.slice(0, 12);
+            }
+            e.target.value = value;
+        });
+
+        // Format phone number
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 10) {
+                value = value.slice(0, 10);
+            }
+            e.target.value = value;
+        });
+
+        // Close mobile menu when window is resized to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                document.getElementById('navLinks').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
